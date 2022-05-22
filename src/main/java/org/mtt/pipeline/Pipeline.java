@@ -21,4 +21,7 @@ public class Pipeline<O> implements Iterable<O>{
         return (Iterator<O>) lastStage;
     }
 
+    public void batch() {
+        this.forEach(x -> {});
+    }
 }

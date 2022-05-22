@@ -5,15 +5,11 @@ import java.util.Iterator;
 public abstract class Stage<O> implements Iterator<O> {
     protected Stage<?> inputStage = null;
 
-//    protected Stage(Stage<?> inputStage) {
-//        this.inputStage = inputStage;
-//    }
-
-    public Stage<?> getInputStage() {
+    public final Stage<?> getInputStage() {
         return inputStage;
     }
 
-    public void setInputStage(Stage<?> inputStage) {
+    public final void setInputStage(Stage<?> inputStage) {
         this.inputStage = inputStage;
     }
 }
