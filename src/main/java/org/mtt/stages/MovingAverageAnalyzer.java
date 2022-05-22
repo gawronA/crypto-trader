@@ -8,10 +8,12 @@ public class MovingAverageAnalyzer extends Stage<MovingAverageDto> {
 
     private final PositionEvent longEvent;
     private final PositionEvent shortEvent;
+    private int delay;
 
-    public MovingAverageAnalyzer(PositionEvent longEvent, PositionEvent shortEvent) {
+    public MovingAverageAnalyzer(PositionEvent longEvent, PositionEvent shortEvent, int delay) {
         this.longEvent = longEvent;
         this.shortEvent = shortEvent;
+        this.delay = delay;
     }
 
     @Override
@@ -25,7 +27,8 @@ public class MovingAverageAnalyzer extends Stage<MovingAverageDto> {
         CandleDto candle = dto.getCandle();
         double value = dto.getValue();
 
-        if(candle.getOpen() > value && candle.getClose() > value) longEvent.invoke(dto);
+        if(delay > 0) delay--;
+        else if(candle.getOpen() > value && candle.getClose() > value) longEvent.invoke(dto);
         else if(candle.getOpen() < value && candle.getClose() < value) shortEvent.invoke(dto);
 
         return dto;

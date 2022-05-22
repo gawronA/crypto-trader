@@ -42,8 +42,11 @@ public class TraderState {
             isShortOpened = false;
             System.out.println("Open long at " + candle.getOpen() + " " + df.format(candle.getDate()));
 
-            String row = df.format(candle.getDate()) + "," + candle.getOpen();
-            try {
+            String row = df.format(candle.getDate()) + "," +
+                    candle.getOpen() + "," +
+                    candle.getClose() + "," +
+                    candle.getHigh() + "," +
+                    candle.getLow() + "\n";            try {
                 longDataWriter.write(row);
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -54,10 +57,14 @@ public class TraderState {
     public void openShort(CandleDto candle) {
         if(!isShortOpened) {
             isShortOpened = true;
-            isLongOpened = true;
+            isLongOpened = false;
             System.out.println("Open short at " + candle.getOpen() + " " + df.format(candle.getDate()));
 
-            String row = df.format(candle.getDate()) + "," + candle.getOpen();
+            String row = df.format(candle.getDate()) + "," +
+                    candle.getOpen() + "," +
+                    candle.getClose() + "," +
+                    candle.getHigh() + "," +
+                    candle.getLow() + "\n";
             try {
                 shortDataWriter.write(row);
             } catch (IOException e) {

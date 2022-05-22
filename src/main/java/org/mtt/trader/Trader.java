@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 public class Trader {
 
     public static void main(String[] args) throws Exception {
-        final String path = "/coin_Ethereum.csv";
+        final String path = "/coin_Bitcoin.csv";
         final int period = 50;
         int a = 0;
 
@@ -30,7 +30,8 @@ public class Trader {
         pipeline.addStage(new OpenMovingAverageStreamer(period));
         pipeline.addStage(new MovingAverageAnalyzer(
                 dto -> TraderState.getInstance().openLong(dto.getCandle()),
-                dto -> TraderState.getInstance().openShort(dto.getCandle())
+                dto -> TraderState.getInstance().openShort(dto.getCandle()),
+                1000
         ));
 
 //        pipeline.batch();
